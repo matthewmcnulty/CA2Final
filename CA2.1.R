@@ -56,7 +56,7 @@ library(dplyr)
 NIPostcodes$`Alt/Secondary Thorfare` <- coalesce(NIPostcodes$`Alt Thorfare`, 
                                                  NIPostcodes$`Secondary Thorfare`)
 # Deleting the columns we had originally merged together, 
-# since we now have a column containg the data from .
+# since we now have a column containg the data from both.
 NIPostcodes <- NIPostcodes[c(1:5, 16, 8:15)]
 
 # Deleting 8900 rows without a Postcode. 
