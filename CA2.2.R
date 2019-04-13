@@ -23,13 +23,14 @@ AllNICrimeData <- read.csv('AllNICrimeData.csv', header = TRUE,
                            stringsAsFactors = FALSE, na.strings = c("", "NA"))
 
 AllNICrimeData <- AllNICrimeData[c(1, 3, 6, 7, 8, 11)]
+write.csv(AllNICrimeData, "AllNICrimeData.csv")
 
 head(AllNICrimeData)
 str(AllNICrimeData)
 
 # Step 3: Factorising the Crime type attribute.
 class(AllNICrimeData$Crime.type)
-AllNICrimeData$`Crime.type` <- factor(AllNICrimeData$Crime.type)
+AllNICrimeData$Crime.type <- factor(AllNICrimeData$Crime.type)
 class(AllNICrimeData$Crime.type)
 
 head(AllNICrimeData)

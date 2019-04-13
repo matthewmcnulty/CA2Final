@@ -29,10 +29,14 @@ colSums(is.na(NIPostcodes))
 colMeans(is.na(NIPostcodes))
 sum(complete.cases(NIPostcodes))
 
+# Checking if any of the following columns appear with each other or not. 
+# If they do not, we can merge them to condense the data without losing any data.
 sum(complete.cases(NIPostcodes[c("Organisation Name", "Sub-building Name")]))
 sum(complete.cases(NIPostcodes[c("Organisation Name", "Building Name")]))
 sum(complete.cases(NIPostcodes[c("Sub-building Name", "Building Name")]))
 
+# Checking if any of the following columns appear with each other or not. 
+# If they do not, we can merge them to condense the data without losing any data.
 sum(complete.cases(NIPostcodes[c("Alt Thorfare", "Secondary Thorfare")]))
 sum(complete.cases(NIPostcodes[c("Alt Thorfare", "Locality")]))
 sum(complete.cases(NIPostcodes[c("Secondary Thorfare", "Locality")]))
@@ -40,13 +44,23 @@ sum(complete.cases(NIPostcodes[c("Secondary Thorfare", "Locality")]))
 head(NIPostcodes)
 str(NIPostcodes)
 
-# Step 5: Remove or replace missing entries with a suitable identifier. 
-# Decide whether it is best to remove missing data or to recode it.
-#install.packages("dplyr")
+# Step 5:
+install.packages("dplyr")
 library(dplyr)
+
+# Remove or replace missing entries with a suitable identifier. 
+# Decide whether it is best to remove missing data or to recode it.
+
+# Since the 'Alt Thorfare' and 'Secondary Thorfare' never appear together, 
+# it is a good idea to merge the columns together since they both have near identical meaning.
 NIPostcodes$`Alt/Secondary Thorfare` <- coalesce(NIPostcodes$`Alt Thorfare`, 
                                                  NIPostcodes$`Secondary Thorfare`)
+# Deleting the columns we had originally merged together, 
+# since we now have a column containg the data from .
 NIPostcodes <- NIPostcodes[c(1:5, 16, 8:15)]
+
+# Deleting 8900 rows without a Postcode. 
+# Postcode is an important component of the address, and is essential in the answering of section 2.
 NIPostcodes <- NIPostcodes[complete.cases(NIPostcodes[ , "Postcode"]),]
 
 head(NIPostcodes)
