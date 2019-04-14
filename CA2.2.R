@@ -9,7 +9,7 @@ getwd()
 
 csv_files <- list.files(full.names = TRUE, recursive = TRUE)
 csv_files
-AllNICrimeData <- Reduce(rbind, lapply(csv_files, read.csv)) # 1)
+AllNICrimeData <- Reduce(rbind, lapply(csv_files, read.csv))
 
 setwd("../")
 getwd()
@@ -155,5 +155,3 @@ ggplot(chart_data, aes(x = factor(Crime.type)))+
     theme(
       plot.title = element_text(hjust = 0.5, colour = "black", size = 14),
       axis.text.x = element_text(angle = 65, vjust = 0.6))
-
-# References: 1) https://gist.github.com/MarkEdmondson1234/c119bfe81af5d5ab81c8
